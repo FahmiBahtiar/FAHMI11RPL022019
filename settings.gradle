@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "FAHMI11RPL022019"
