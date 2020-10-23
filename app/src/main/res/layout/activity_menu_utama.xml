@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,32 +12,42 @@
         android:layout_margin="20dp"
         app:cardBackgroundColor="#FFFFFF"
         app:cardElevation="10dp"
+        app:cardCornerRadius="46dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
 
-            android:layout_width="match_parent"
-            android:layout_height="183dp">
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="169dp"
+                    android:src="@mipmap/test"/>
 
                 <TextView
                     android:id="@+id/tvname01"
-                    android:text="Test1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:text="Chicken Dinner 1"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="#0021FF"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginBottom="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                      />
+        <TextView
+            android:id="@+id/tvname001"
+            android:text="List Film "
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#FF4500"
+            android:layout_gravity="center"
+            android:layout_marginLeft="60dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
 
 
-
-
-            </RelativeLayout>
-        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 
@@ -46,30 +57,38 @@
         android:layout_margin="20dp"
         app:cardBackgroundColor="#ffff"
         app:cardElevation="10dp"
+        app:cardCornerRadius="46dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="169dp"
+            android:src="@mipmap/test"/>
 
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="183dp">
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvname02"
-                    android:text="Test2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
-
-
-            </RelativeLayout>
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tvname02"
+            android:text="Chicken Dinner 2"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#0021FF"
+            android:layout_gravity="center"
+            android:layout_marginLeft="60dp"
+            android:layout_marginBottom="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:id="@+id/tvname002"
+            android:text="Favourite Film "
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#FF4500"
+            android:layout_gravity="center"
+            android:layout_marginLeft="60dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
     </androidx.cardview.widget.CardView>
 
 

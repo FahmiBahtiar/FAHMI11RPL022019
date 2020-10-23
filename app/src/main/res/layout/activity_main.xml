@@ -48,8 +48,20 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:hint="Password"
+        android:inputType="textPassword"
         android:textColorHint="#797979"
         android:backgroundTint="#797979"/>
+
+    <TextView
+        android:id="@+id/tvpasswordsalah"
+        android:text=""
+        android:textColor="#F31111"
+        android:textSize="19dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/btnlogin"

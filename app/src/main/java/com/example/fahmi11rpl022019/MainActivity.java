@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences pref;
@@ -15,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText txtusername;
     EditText txtpassword;
+    TextView tvpasswordsalah;
     Button btnlogin;
 
     @Override
@@ -24,21 +27,29 @@ public class MainActivity extends AppCompatActivity {
         pref = getSharedPreferences("login", MODE_PRIVATE);
         txtusername = (EditText)findViewById(R.id.txtusername);
         txtpassword = (EditText)findViewById(R.id.txtpassword);
+        tvpasswordsalah = (TextView)findViewById(R.id.tvpasswordsalah);
         btnlogin = (Button) findViewById(R.id.btnlogin);
+
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (txtusername.getText().toString().equalsIgnoreCase("Hamba Allah")
-                        && txtpassword.getText().toString().equalsIgnoreCase("admin")){
-                    //SharePreference
+                if (txtusername.getText().toString().equals("Hamba Allah") && txtpassword.getText().toString().equals("admin")) {
+                    Toast.makeText(MainActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(MainActivity.this, MenuUtama.class);
+                    intent.putExtra("email", txtusername.getText().toString());
+                    startActivity(intent);
+
                     editor = pref.edit();
-                    editor.putString("username", txtusername.getText().toString());
-                    editor.putString("status", "login");
+                    editor.putString("userid", txtusername.getText().toString());
                     editor.apply();
-                    //Main Menu
-                    startActivity(new Intent(getApplicationContext(), MenuUtama.class));
                     finish();
+                } else if(txtusername.getText().toString().equals("hambaallah@gmail.com") && !txtpassword.getText().toString().equals("hambaallah")){
+                    tvpasswordsalah.setText("Password Salah.");
+                } else if (!txtusername.getText().toString().equals("hambaallah@gmail.com") && !txtpassword.getText().toString().equals("hambaallah")){
+                    tvpasswordsalah.setText("Kombinasi Email Dan Password Salah.");
                 }
+
             }
         });
     }

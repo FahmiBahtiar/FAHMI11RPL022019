@@ -1,5 +1,7 @@
 package com.example.fahmi11rpl022019;
 
+import android.content.DialogInterface;
+import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -11,20 +13,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
+
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DatakuViewHolder> {
-    private ArrayList<Model> dataList;
+public class Dataadapterfavorite extends RecyclerView.Adapter<Dataadapterfavorite.DatakuViewHolder> {
+    private List<modelmovierealm> dataList;
     private Callback callback;
     View viewku;
     int posku;
+    Realm realm;
+    RealmHelper realmHelper;
 
     interface Callback {
         void onClick(int position);
@@ -32,10 +40,13 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DatakuViewHold
     }
 
 
-    public DataAdapter(ArrayList<Model> dataList, Callback callback) {
+    public Dataadapterfavorite(List<modelmovierealm> dataList, Callback callback) {
         this.callback = callback;
         this.dataList = dataList;
         Log.d("makanan", "MahasiswaAdapter: "+dataList.size()+"");
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+        realm = Realm.getInstance(configuration);
+        realmHelper = new RealmHelper(realm);
     }
 
     @Override
@@ -47,12 +58,12 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DatakuViewHold
 
     @Override
     public void onBindViewHolder(final DatakuViewHolder holder, final int position) {
-        holder.txtNama.setText(dataList.get(position).getOriginal_title());
-        holder.txtNpm.setText(dataList.get(position).getRelease_date());
-        Log.d("makananku", "onBindViewHolder: "+dataList.get(position).getPoster_path());
+        holder.txtNama.setText(dataList.get(position).getJudul());
+        holder.txtNpm.setText(dataList.get(position).getReleaseDate());
+        Log.d("makananku", "onBindViewHolder: "+dataList.get(position).getPath());
         //pakai glide karena untuk nampilkan data gambar dari URL / permission / graddle
         Glide.with(holder.itemView)
-                .load(dataList.get(position).getPoster_path())
+                .load(dataList.get(position).getPath())
                 //.override(Target.SIZE_ORIGINAL)
                 .apply(new RequestOptions().override(600, 200))
                 .placeholder(R.mipmap.ic_launcher)
@@ -109,7 +120,26 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.DatakuViewHold
 
                 case 2:
                     //Do stuff
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which){
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    //Yes button clicked
+                                    realmHelper.delete(dataList.get(posku).getId());
+                                    notifyDataSetChanged();
+                                    break;
 
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    //No button clicked
+                                    break;
+                            }
+                        }
+                    };
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(viewku.getContext());
+                    builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                            .setNegativeButton("No", dialogClickListener).show();
                     break;
             }
             return true;

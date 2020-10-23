@@ -20,10 +20,16 @@ public class MenuUtama extends AppCompatActivity {
         menu1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), List.class));
+                startActivity(new Intent(getApplicationContext(), loadingbar2.class));
             }
         });
         menu2 = (CardView)findViewById(R.id.menu2);
+        menu2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), loadingactivity.class));
+            }
+        });
 
     }
 }
